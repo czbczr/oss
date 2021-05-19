@@ -1,0 +1,24 @@
+{
+  "name": "lancet-oss",
+  "version": "1.0.3",
+  "description": "oss",
+  "main": "OSS.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "peerDependencies": {
+    "ali-oss": ">=6.15.2"
+  },
+  "browserslist": [
+    "> 1%",
+    "last 2 versions",
+    "not ie <= 11"
+  ],   
+  "engines": {
+    "node": ">= 4.0.0",
+    "npm": ">= 3.0.0"
+  },
+  "author": "caozhongrui <334531005@qq.com>",
+  "license": "MIT",
+  "keywords":["lancet","oss"]
+}
