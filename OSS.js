@@ -1,4 +1,4 @@
-//version 1.0.31
+//version 1.0.32
 import OSS from 'ali-oss'
 
 function useOSSUpload(ossOpts,file,size=100){
@@ -33,20 +33,28 @@ async function put(file,obj={}){
   const fileName=obj.dir+new Date().getTime()+'-'+file.name;
  
   try {
-// object表示上传到OSS的文件名称。
-// file表示浏览器中需要上传的文件，支持HTML5 file和Blob类型。
-let r1 = await client.put(fileName, file,{
-  mime:'application/json',
-  callback:{
-    url:obj.callbackUrl,
-    contentType:'application/json',
-    body:'{\"bucket\":${bucket},\"size\":${size},\"mimeType\":${mimeType},\"filename\":${object},\"etag\":${etag},\"clientId\":${x:clientId},\"userId\":${x:userId}}',
-    customValue:{
-      'clientId':obj.clientId,
-      'userId':obj.userId
+    // object表示上传到OSS的文件名称。
+    // file表示浏览器中需要上传的文件，支持HTML5 file和Blob类型。
+    let r1 = await client.put(fileName, file,{
+      mime:'application/json',
+      callback:{
+        url:obj.callbackUrl,
+        contentType:'application/json',
+        body:'{\"bucket\":${bucket},\"size\":${size},\"mimeType\":${mimeType},\"filename\":${object},\"etag\":${etag},\"clientId\":${x:clientId},\"userId\":${x:userId}}',
+        customValue:{
+          'clientId':obj.clientId,
+          'userId':obj.userId
+        }
+      }
+    });
+    if(r1.res.status===200&&r1.res.statusCode===200){
+      console.log('----oss返回成功----',r1);
+      return Promise.resolve(r1);
     }
-  }
-});
+    else{
+      console.warn('----oss返回失败----',r1);
+      return Promise.reject(r1);
+    }
   } catch (err) {
     console.error('----then处理逻辑失败 catch----',err);
     return Promise.reject(err);
