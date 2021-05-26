@@ -11,7 +11,9 @@ option={
 	stsToken,
 	bucket,
   clientId,
-  userId
+  userId,
+	dir,
+	callbackUrl
 }
 ```
 
