@@ -1,4 +1,4 @@
-//version 1.0.32
+//version 1.0.33
 import OSS from 'ali-oss'
 
 function useOSSUpload(ossOpts,file,size=100){
@@ -36,7 +36,7 @@ async function put(file,obj={}){
     // object表示上传到OSS的文件名称。
     // file表示浏览器中需要上传的文件，支持HTML5 file和Blob类型。
     let r1 = await client.put(fileName, file,{
-      mime:'application/json',
+      mime:file.type,
       callback:{
         url:obj.callbackUrl,
         contentType:'application/json',
